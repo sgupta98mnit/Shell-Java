@@ -22,14 +22,16 @@ public class Main {
                 break;
             }
 
-            CommandRegistry commandRegistry = CommandRegistry.getInstance();
             try {
+                CommandRegistry commandRegistry = CommandRegistry.getInstance();
                 Command command = commandRegistry.getCommand(input);
                 CommandContext context = new CommandContext();
                 context.setArgument(input);
                 command.execute(context);
             } catch (CommandNotFound e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
