@@ -1,4 +1,5 @@
 import commands.Command;
+import commands.CommandContext;
 import commands.CommandRegistry;
 import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +25,9 @@ public class Main {
             CommandRegistry commandRegistry = CommandRegistry.getInstance();
             try {
                 Command command = commandRegistry.getCommand(input);
-                command.execute();
+                CommandContext context = new CommandContext();
+                context.setArgument(input);
+                command.execute(context);
             } catch (CommandNotFound e) {
                 System.out.println(e.getMessage());
             }
