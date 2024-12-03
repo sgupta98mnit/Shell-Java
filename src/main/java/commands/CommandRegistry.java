@@ -9,7 +9,7 @@ import java.util.Map;
 public class CommandRegistry {
 
     private static final CommandRegistry instance = new CommandRegistry();
-    private static final Map<String, Command> commandRegistry = new HashMap<>();
+    public static final Map<String, Command> commandRegistry = new HashMap<>();
 
     private CommandRegistry() {}
 
