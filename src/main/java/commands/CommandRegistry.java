@@ -11,7 +11,9 @@ public class CommandRegistry {
     private static final CommandRegistry instance = new CommandRegistry();
     public static final Map<String, Command> commandRegistry = new HashMap<>();
 
-    private CommandRegistry() {}
+    private CommandRegistry() {
+        commandRegistry.put("echo", new Echo());
+    }
 
     public static CommandRegistry getInstance() {
         return instance;
