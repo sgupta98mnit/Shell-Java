@@ -26,7 +26,6 @@ public class Main {
                 context.setLine(input);
                 parseCommand(context);
                 Command command = commandRegistry.getCommand(context);
-                context.setArgument(input);
                 command.execute(context);
             } catch (CommandNotFound e) {
                 System.out.println(e.getMessage());
