@@ -33,10 +33,10 @@ public class CommandRegistry {
     }
 
     // Get command by name
-    public Command getCommand(String commandName) throws CommandNotFound {
-        Command command = commandRegistry.get(commandName);
+    public Command getCommand(CommandContext context) throws CommandNotFound {
+        Command command = commandRegistry.get(context.getCommand());
         if (command == null) {
-            throw new CommandNotFound(commandName);
+            throw new CommandNotFound(context.getLine());
         }
         return command;
     }

@@ -22,8 +22,10 @@ public class Main {
 
             try {
                 CommandRegistry commandRegistry = CommandRegistry.getInstance();
-                Command command = commandRegistry.getCommand(input);
                 CommandContext context = new CommandContext();
+                context.setLine(input);
+                parseCommand(context);
+                Command command = commandRegistry.getCommand(context);
                 context.setArgument(input);
                 command.execute(context);
             } catch (CommandNotFound e) {
@@ -33,5 +35,19 @@ public class Main {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void parseCommand(CommandContext context) {
+        int firstSpaceIndex = StringUtils.indexOf(context.getLine(), ' ');
+
+        if (firstSpaceIndex == -1) {
+            System.out.println("No space found: " + context.getLine());
+            context.setCommand(context.getLine());
+        }
+        String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
+        String argument = StringUtils.substring(context.getLine(), firstSpaceIndex + 1);
+
+        context.setCommand(command);
+        context.setArgument(argument);
     }
 }
