@@ -49,6 +49,6 @@ public class Main {
 
         context.setCommand(command);
         context.setArgument(argument);
-        System.out.println("Context: " + context);
+        //System.out.println("Context: " + context);
     }
 }
