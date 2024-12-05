@@ -28,8 +28,8 @@ public class Main {
                 Command command = commandRegistry.getCommand(context);
                 command.execute(context);
             } catch (CommandNotFound e) {
-                //System.out.println(e.getMessage());
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+//                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
