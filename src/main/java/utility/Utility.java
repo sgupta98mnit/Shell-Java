@@ -6,7 +6,7 @@ public final class Utility {
 
     public static boolean checkDirectory(String path) {
         File file = new File(path);
-        System.out.println(path + ": " + file.isDirectory());
+        System.out.println(path + ": " + file.isFile());
         return file.exists() && file.isDirectory();
     }
 }
