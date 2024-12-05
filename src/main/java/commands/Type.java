@@ -17,8 +17,9 @@ public class Type implements Command {
             String[] paths = StringUtils.split(path, ":");
 
             for(String p : paths) {
-                if(Utility.checkDirectory(p + "/" + context.getArgument())) {
-                    System.out.println(context.getArgument() + " is a shell builtin");
+                String filePath = p + "/" + context.getArgument();
+                if(Utility.checkDirectory(filePath)) {
+                    System.out.println(context.getArgument() + " is " + filePath);
                     return;
                 }
             }
