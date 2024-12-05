@@ -9,7 +9,9 @@ public class Cd implements Command{
     public void execute(CommandContext context) throws CommandNotFound {
         String path = context.getArgument();
 
-        File file = new File(path);
+        String currentDirectory = System.getProperty("user.dir");
+
+        File file = new File(currentDirectory, path);
 
         if(file.exists()){
             System.setProperty("user.dir", path);
