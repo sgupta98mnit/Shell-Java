@@ -1,6 +1,9 @@
 package commands;
 
 import exception.CommandNotFound;
+import org.apache.commons.lang3.StringUtils;
+import utility.Utility;
+
 
 public class Type implements Command {
 
@@ -9,6 +12,15 @@ public class Type implements Command {
         CommandRegistry registry = CommandRegistry.getInstance();
 
         try {
+            String path = System.getenv("PATH");
+            String[] paths = StringUtils.split(path, ":");
+
+            for(String p : paths) {
+                if(Utility.checkDirectory(p + "/" + context.getArgument())) {
+                    System.out.println(context.getArgument() + " is a shell builtin");
+                    return;
+                }
+            }
             registry.getCommandByCommandName(context.getArgument());
             System.out.println(context.getArgument() + " is a shell builtin");
         } catch (CommandNotFound e) {
