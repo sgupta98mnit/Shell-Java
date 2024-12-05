@@ -15,11 +15,6 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
 
-            // Handle Exit Command case
-            if(StringUtils.equals(input, "exit 0")) {
-                break;
-            }
-
             try {
                 CommandRegistry commandRegistry = CommandRegistry.getInstance();
                 CommandContext context = new CommandContext();
@@ -27,6 +22,8 @@ public class Main {
                 parseCommand(context);
                 Command command = commandRegistry.getCommand(context);
                 command.execute(context);
+                if(StringUtils.equalsIgnoreCase(context.getCommand(), "exit"))
+                    break;
             } catch (CommandNotFound e) {
                 System.out.println(e.getMessage());
 //                e.printStackTrace();

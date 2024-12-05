@@ -21,6 +21,8 @@ public class CommandRegistry {
     private void initializeCommands() {
         try {
             commandRegistry.put("echo", new Echo());
+            commandRegistry.put("exit", new Exit());
+            commandRegistry.put("type", new Type());
         } catch (Exception e) {
             // Log initialization failure or rethrow as unchecked
             throw new RuntimeException("Failed to initialize commands", e);
@@ -37,6 +39,14 @@ public class CommandRegistry {
         Command command = commandRegistry.get(context.getCommand());
         if (command == null) {
             throw new CommandNotFound(context.getLine());
+        }
+        return command;
+    }
+
+    public Command getCommandByCommandName(String commandName) throws CommandNotFound {
+        Command command = commandRegistry.get(commandName);
+        if (command == null) {
+            throw new CommandNotFound(commandName);
         }
         return command;
     }
