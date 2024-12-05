@@ -13,7 +13,7 @@ public class Type implements Command {
 
         try {
             String path = System.getenv("PATH");
-            System.out.println(path);
+//            System.out.println(path);
             String[] paths = StringUtils.split(path, ":");
 
             for(String p : paths) {
