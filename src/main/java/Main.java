@@ -40,7 +40,7 @@ public class Main {
         int firstSpaceIndex = StringUtils.indexOf(context.getLine(), ' ');
 
         if (firstSpaceIndex == -1) {
-            System.out.println("No space found: " + context.getLine());
+            //System.out.println("No space found: " + context.getLine());
             context.setCommand(context.getLine());
         }
         String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
