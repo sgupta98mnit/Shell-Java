@@ -17,7 +17,7 @@ public class Cd implements Command{
         }
 
         if(file.exists()){
-            System.setProperty("user.dir", path);
+            System.setProperty("user.dir", file.getAbsolutePath());
         } else {
             System.out.println("cd: " + context.getArgument() + ": No such file or directory");
         }
