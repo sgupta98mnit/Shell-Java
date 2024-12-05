@@ -16,16 +16,8 @@ public class Type implements Command {
             System.out.println(context.getArgument() + " is a shell builtin");
         } catch (CommandNotFound e) {
             // Check if command exist in PATH
-            String path = System.getenv("PATH");
-            String[] paths = StringUtils.split(path, ":");
-
-            for(String p : paths) {
-                String filePath = p + "/" + context.getArgument();
-                if(Utility.checkDirectory(filePath)) {
-                    System.out.println(context.getArgument() + " is " + filePath);
-                    return;
-                }
-            }
+            if(Utility.checkFileExistsOnPath(context.getArgument()))
+                return;
             System.out.println(e.getMessage());
         }
     }
