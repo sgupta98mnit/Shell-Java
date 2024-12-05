@@ -12,18 +12,17 @@ public final class Utility {
         return file.isFile();
     }
 
-    public static boolean checkFileExistsOnPath(String fileName) {
+    public static String checkFileExistsOnPath(String fileName) {
         String path = System.getenv("PATH");
         String[] paths = StringUtils.split(path, ":");
 
         for(String p : paths) {
             String filePath = p + "/" + fileName;
             if(Utility.checkFileExists(filePath)) {
-//                System.out.println(fileName + " is " + filePath);
-                return true;
+                return filePath;
             }
         }
-        return false;
+        return "";
     }
 
 

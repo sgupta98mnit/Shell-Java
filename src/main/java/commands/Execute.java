@@ -1,6 +1,7 @@
 package commands;
 
 import exception.CommandNotFound;
+import org.apache.commons.lang3.StringUtils;
 import utility.Utility;
 
 import java.io.BufferedReader;
@@ -10,7 +11,8 @@ public class Execute implements Command {
 
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-        if(Utility.checkFileExistsOnPath(context.getCommand())) {
+        String filePath = Utility.checkFileExistsOnPath(context.getCommand());
+        if(StringUtils.isNotBlank(filePath)) {
             try {
                 Process process = Runtime.getRuntime().exec(context.getLine());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
