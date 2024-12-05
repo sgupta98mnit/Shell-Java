@@ -39,6 +39,7 @@ public class Main {
         if (firstSpaceIndex == -1) {
             //System.out.println("No space found: " + context.getLine());
             context.setCommand(context.getLine());
+            return;
         }
         String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
         String argument = StringUtils.substring(context.getLine(), firstSpaceIndex + 1);
