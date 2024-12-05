@@ -23,6 +23,7 @@ public class CommandRegistry {
             commandRegistry.put("echo", new Echo());
             commandRegistry.put("exit", new Exit());
             commandRegistry.put("type", new Type());
+            commandRegistry.put("pwd", new Pwd());
         } catch (Exception e) {
             // Log initialization failure or rethrow as unchecked
             throw new RuntimeException("Failed to initialize commands", e);
