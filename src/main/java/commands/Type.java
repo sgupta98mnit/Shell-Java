@@ -12,8 +12,11 @@ public class Type implements Command {
         CommandRegistry registry = CommandRegistry.getInstance();
 
         try {
+            registry.getCommandByCommandName(context.getArgument());
+            System.out.println(context.getArgument() + " is a shell builtin");
+        } catch (CommandNotFound e) {
+            // Check if command exist in PATH
             String path = System.getenv("PATH");
-//            System.out.println(path);
             String[] paths = StringUtils.split(path, ":");
 
             for(String p : paths) {
@@ -23,9 +26,6 @@ public class Type implements Command {
                     return;
                 }
             }
-            registry.getCommandByCommandName(context.getArgument());
-            System.out.println(context.getArgument() + " is a shell builtin");
-        } catch (CommandNotFound e) {
             System.out.println(e.getMessage());
         }
     }
