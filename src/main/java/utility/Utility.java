@@ -19,7 +19,7 @@ public final class Utility {
         for(String p : paths) {
             String filePath = p + "/" + fileName;
             if(Utility.checkFileExists(filePath)) {
-                System.out.println(fileName + " is " + filePath);
+//                System.out.println(fileName + " is " + filePath);
                 return true;
             }
         }
