@@ -12,6 +12,10 @@ public class Cd implements Command {
         String path = context.getArgument();
         String currentDirectory = System.getProperty("user.dir");
 
+        if(StringUtils.equals("~", context.getArgument())) {
+            System.setProperty("user.dir", System.getProperty("user.home"));
+        }
+
         String fullPath;
         if (StringUtils.startsWithIgnoreCase(path, "/")) {
             fullPath = path;
