@@ -25,6 +25,7 @@ public class CommandRegistry {
             commandRegistry.put("type", new Type());
             commandRegistry.put("pwd", new Pwd());
             commandRegistry.put("cd", new Cd());
+            commandRegistry.put("cat", new Cat());
         } catch (Exception e) {
             // Log initialization failure or rethrow as unchecked
             throw new RuntimeException("Failed to initialize commands", e);
