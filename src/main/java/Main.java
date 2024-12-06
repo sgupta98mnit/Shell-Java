@@ -50,24 +50,18 @@ public class Main {
 //        context.setArgument(argument);
         //System.out.println("Context: " + context);
 
-        String[] splitString = StringUtils.split(context.getLine(), " ");
+        int firstSpacePos = StringUtils.indexOf(context.getLine(), " ");
+        String command = StringUtils.substring(context.getLine(), 0, firstSpacePos);
+        context.setCommand(command);
+        String argumentString = StringUtils.substring(context.getLine(), firstSpacePos + 1, context.getLine().length());
+        String[] arguments;
+        if(StringUtils.startsWith(argumentString, "'")) {
+            argumentString = StringUtils.remove(argumentString, " ");
+            arguments = StringUtils.split(argumentString, "'");
 
-        for(int i = 0; i < splitString.length; i++) {
-            if(i == 0) {
-                context.setCommand(splitString[i]);
-            } else {
-                // rest are arguments
-                String[] arguments = new String[splitString.length - 1];
-                for(int j = 1; j < splitString.length; j++) {
-                    if(StringUtils.contains(splitString[j], "'")) {
-                        //Pattern.compile("'(.*?)'") creates a pattern to match text between single quotes.
-                        Pattern pattern = Pattern.compile("'(.*?)'");
-                        Matcher matcher = pattern.matcher(splitString[j]);
-                        arguments[j-1] = matcher.group(1);
-                    }
-                }
-                context.setArguments(arguments);
-            }
         }
+        else
+            arguments = StringUtils.split(argumentString, " ");
+        context.setArguments(arguments);
     }
 }
