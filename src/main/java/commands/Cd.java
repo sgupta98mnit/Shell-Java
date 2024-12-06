@@ -13,7 +13,7 @@ public class Cd implements Command {
         String currentDirectory = System.getProperty("user.dir");
 
         if(StringUtils.equals("~", context.getArgument())) {
-            System.setProperty("user.dir", System.getProperty("user.home"));
+            System.setProperty("user.dir", System.getenv("HOME"));
             return;
         }
 
