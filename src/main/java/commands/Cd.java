@@ -14,6 +14,7 @@ public class Cd implements Command {
 
         if(StringUtils.equals("~", context.getArgument())) {
             System.setProperty("user.dir", System.getProperty("user.home"));
+            return;
         }
 
         String fullPath;
