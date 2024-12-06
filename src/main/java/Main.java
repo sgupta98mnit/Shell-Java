@@ -60,8 +60,10 @@ public class Main {
             arguments = StringUtils.substringsBetween(argumentString, "'", "'");
 
         }
-        else
+        else {
+            argumentString = " " + argumentString + " ";
             arguments = StringUtils.split(argumentString, " ");
+        }
         context.setArguments(arguments);
     }
 }
