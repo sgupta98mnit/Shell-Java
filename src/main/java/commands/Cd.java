@@ -4,6 +4,7 @@ import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Cd implements Command {
     @Override
@@ -19,12 +20,17 @@ public class Cd implements Command {
             fullPath = new File(currentDirectory, path).getAbsolutePath();
         }
 
-        File file = new File(fullPath);
+        try {
+            // Normalize the path to resolve . and .. segments
+            File file = new File(fullPath).getCanonicalFile();
 
-        if (file.exists() && file.isDirectory()) {
-            System.setProperty("user.dir", fullPath);
-        } else {
-            System.out.println("cd: " + context.getArgument() + ": No such file or directory");
+            if (file.exists() && file.isDirectory()) {
+                System.setProperty("user.dir", file.getAbsolutePath());
+            } else {
+                System.out.println("cd: " + context.getArgument() + ": No such file or directory");
+            }
+        } catch (IOException e) {
+            System.out.println("cd: Error resolving path: " + e.getMessage());
         }
     }
 }
