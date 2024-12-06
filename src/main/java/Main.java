@@ -5,6 +5,8 @@ import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -34,18 +36,38 @@ public class Main {
     }
 
     private static void parseCommand(CommandContext context) {
-        int firstSpaceIndex = StringUtils.indexOf(context.getLine(), ' ');
-
-        if (firstSpaceIndex == -1) {
-            //System.out.println("No space found: " + context.getLine());
-            context.setCommand(context.getLine());
-            return;
-        }
-        String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
-        String argument = StringUtils.substring(context.getLine(), firstSpaceIndex + 1);
-
-        context.setCommand(command);
-        context.setArgument(argument);
+//        int firstSpaceIndex = StringUtils.indexOf(context.getLine(), ' ');
+//
+//        if (firstSpaceIndex == -1) {
+//            //System.out.println("No space found: " + context.getLine());
+//            context.setCommand(context.getLine());
+//            return;
+//        }
+//        String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
+//        String argument = StringUtils.substring(context.getLine(), firstSpaceIndex + 1);
+//
+//        context.setCommand(command);
+//        context.setArgument(argument);
         //System.out.println("Context: " + context);
+
+        String[] splitString = StringUtils.split(context.getLine(), " ");
+
+        for(int i = 0; i < splitString.length; i++) {
+            if(i == 0) {
+                context.setCommand(splitString[i]);
+            } else {
+                // rest are arguments
+                String[] arguments = new String[splitString.length - 1];
+                for(int j = 1; j < splitString.length; j++) {
+                    if(StringUtils.contains(splitString[j], "'")) {
+                        //Pattern.compile("'(.*?)'") creates a pattern to match text between single quotes.
+                        Pattern pattern = Pattern.compile("'(.*?)'");
+                        Matcher matcher = pattern.matcher(splitString[j]);
+                        arguments[j-1] = matcher.group(1);
+                    }
+                }
+                context.setArguments(arguments);
+            }
+        }
     }
 }

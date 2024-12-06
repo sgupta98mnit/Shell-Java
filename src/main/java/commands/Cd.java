@@ -9,10 +9,10 @@ import java.io.IOException;
 public class Cd implements Command {
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-        String path = context.getArgument();
+        String path = context.getArguments()[0];
         String currentDirectory = System.getProperty("user.dir");
 
-        if(StringUtils.equals("~", context.getArgument())) {
+        if(StringUtils.equals("~", context.getArguments()[0])) {
             System.setProperty("user.dir", System.getenv("HOME"));
             return;
         }
@@ -32,7 +32,7 @@ public class Cd implements Command {
             if (file.exists() && file.isDirectory()) {
                 System.setProperty("user.dir", file.getAbsolutePath());
             } else {
-                System.out.println("cd: " + context.getArgument() + ": No such file or directory");
+                System.out.println("cd: " + context.getArguments()[0] + ": No such file or directory");
             }
         } catch (IOException e) {
             System.out.println("cd: Error resolving path: " + e.getMessage());

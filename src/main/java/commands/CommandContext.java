@@ -1,18 +1,20 @@
 package commands;
 
+import java.util.Arrays;
+
 public class CommandContext {
-    private String argument;
+    private String[] arguments;
 
     private String command;
 
     private String line;
 
-    public String getArgument() {
-        return argument;
+    public String[] getArguments() {
+        return arguments;
     }
 
-    public void setArgument(String argument) {
-        this.argument = argument;
+    public void setArguments(String[] arguments) {
+        this.arguments = arguments;
     }
 
     public String getCommand() {
@@ -34,8 +36,9 @@ public class CommandContext {
     @Override
     public String toString() {
         return "CommandContext{" +
-                "argument='" + argument + '\'' +
+                "arguments=" + Arrays.toString(arguments) +
                 ", command='" + command + '\'' +
+                ", line='" + line + '\'' +
                 '}';
     }
 }

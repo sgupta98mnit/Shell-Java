@@ -12,13 +12,13 @@ public class Type implements Command {
         CommandRegistry registry = CommandRegistry.getInstance();
 
         try {
-            registry.getCommandByCommandName(context.getArgument());
-            System.out.println(context.getArgument() + " is a shell builtin");
+            registry.getCommandByCommandName(context.getArguments()[0]);
+            System.out.println(context.getArguments()[0] + " is a shell builtin");
         } catch (CommandNotFound e) {
             // Check if command exist in PATH
-            String filePath = Utility.checkFileExistsOnPath(context.getArgument());
+            String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
             if (StringUtils.isNotBlank(filePath)) {
-                System.out.println(context.getArgument() + " is " + filePath);
+                System.out.println(context.getArguments()[0] + " is " + filePath);
                 return ;
             }
             System.out.println(e.getMessage());

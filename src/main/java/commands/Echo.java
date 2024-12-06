@@ -3,6 +3,6 @@ package commands;
 public class Echo implements Command {
     @Override
     public void execute(CommandContext context) {
-        System.out.println(context.getArgument());
+        System.out.println(context.getArguments()[0]);
     }
 }
