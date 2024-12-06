@@ -56,8 +56,8 @@ public class Main {
         String argumentString = StringUtils.substring(context.getLine(), firstSpacePos + 1, context.getLine().length());
         String[] arguments;
         if(StringUtils.startsWith(argumentString, "'")) {
-            argumentString = StringUtils.remove(argumentString, " ");
-            arguments = StringUtils.split(argumentString, "'");
+//            argumentString = StringUtils.remove(argumentString, " ");
+            arguments = StringUtils.substringsBetween(argumentString, "'", "'");
 
         }
         else
