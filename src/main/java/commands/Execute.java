@@ -11,12 +11,16 @@ public class Execute implements Command {
 
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
+        System.out.println("Inside Execute");
         String output = "";
         if(StringUtils.equals(context.getCommand(), "execute")) {
+            System.out.println("Inside Execute1");
             for(String arg : context.getArguments()) {
+                System.out.println(arg);
                 output = output + runProgram(arg, arg) + "\n";
             }
         } else {
+            System.out.println("Inside Execute2");
             output = runProgram(context.getCommand(), context.getLine());
         }
         System.out.println(output);
