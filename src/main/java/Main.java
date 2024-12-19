@@ -22,7 +22,6 @@ public class Main {
                 CommandContext context = new CommandContext();
                 context.setLine(input);
                 parseCommand(context);
-                System.out.println(context);
                 Command command = commandRegistry.getCommand(context);
                 command.execute(context);
                 if(StringUtils.equalsIgnoreCase(context.getCommand(), "exit"))
