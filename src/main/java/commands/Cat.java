@@ -9,6 +9,6 @@ public class Cat implements Command{
         CommandContext executeCommandContext = new CommandContext();
         executeCommandContext.setCommand("execute");
         executeCommandContext.setArguments(context.getArguments());
-        executeCommand.execute(context);
+        executeCommand.execute(executeCommandContext);
     }
 }
