@@ -11,13 +11,13 @@ public class Execute implements Command {
 
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-        StringBuilder output = new StringBuilder();
+        String output = "";
         if(StringUtils.equals(context.getCommand(), "execute")) {
             for(String arg : context.getArguments()) {
-                output.append(runProgram(arg, arg)).append("\n");
+                output = output + runProgram(arg, arg) + "\n";
             }
         } else {
-            output = new StringBuilder(runProgram(context.getCommand(), context.getLine()));
+            output = runProgram(context.getCommand(), context.getLine());
         }
         System.out.println(output);
     }
