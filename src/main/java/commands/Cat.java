@@ -7,10 +7,9 @@ import utility.Utility;
 public class Cat implements Command{
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-        String output = "";
-        System.out.println(context);
+        StringBuilder output = new StringBuilder();
         for(String arg : context.getArguments()){
-            output = output + StringUtils.trim(Utility.readFile(arg));
+            output.append(Utility.readFile(arg));
         }
         System.out.println(output);
     }

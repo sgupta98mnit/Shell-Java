@@ -30,16 +30,17 @@ public final class Utility {
 
     public static String readFile(String filePath) {
         String line = "";
+        String fileContent = "";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                fileContent += line;
             }
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
         }
 
-        return line;
+        return fileContent;
     }
 
 }
