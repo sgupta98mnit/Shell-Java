@@ -18,7 +18,6 @@ public class Execute implements Command {
             }
         } else {
             output = new StringBuilder(runProgram(context.getCommand(), context.getLine()));
-
         }
         System.out.println(output);
     }
