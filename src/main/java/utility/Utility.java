@@ -2,7 +2,10 @@ package utility;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public final class Utility {
 
@@ -25,5 +28,18 @@ public final class Utility {
         return "";
     }
 
+    public static String readFile(String filePath) {
+        String line = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+
+        return line;
+    }
 
 }

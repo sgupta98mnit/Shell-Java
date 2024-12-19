@@ -11,37 +11,22 @@ public class Execute implements Command {
 
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-        System.out.println("Inside Execute");
-        String output = "";
-        if(StringUtils.equals(context.getCommand(), "execute")) {
-            System.out.println("Inside Execute1");
-            for(String arg : context.getArguments()) {
-                System.out.println(arg);
-                output = output + runProgram(arg, arg) + "\n";
-            }
-        } else {
-            System.out.println("Inside Execute2");
-            output = runProgram(context.getCommand(), context.getLine());
-        }
-        System.out.println(output);
-    }
 
-    private String runProgram(String filename, String fileNameWithArguments) throws CommandNotFound {
-        String filePath = Utility.checkFileExistsOnPath(filename);
-        if(StringUtils.isNotBlank(filePath)) {
+        String filePath = Utility.checkFileExistsOnPath(context.getCommand());
+        if (StringUtils.isNotBlank(filePath)) {
             try {
-                Process process = Runtime.getRuntime().exec(fileNameWithArguments);
+                Process process = Runtime.getRuntime().exec(context.getLine());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                 }
-                return line;
+                return;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            throw new CommandNotFound(context.getLine());
         }
-        return new CommandNotFound(fileNameWithArguments).getMessage();
+
     }
 }
