@@ -51,12 +51,15 @@ public class Main {
         //System.out.println("Context: " + context);
 
         int firstSpacePos = StringUtils.indexOf(context.getLine(), " ");
+        if(firstSpacePos == -1) {
+            context.setCommand(context.getLine());
+            return;
+        }
         String command = StringUtils.substring(context.getLine(), 0, firstSpacePos);
         context.setCommand(command);
         String argumentString = StringUtils.substring(context.getLine(), firstSpacePos + 1, context.getLine().length());
         String[] arguments;
         if(StringUtils.startsWith(argumentString, "'")) {
-//            argumentString = StringUtils.remove(argumentString, " ");
             arguments = StringUtils.substringsBetween(argumentString, "'", "'");
 
         }
