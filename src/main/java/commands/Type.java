@@ -24,11 +24,12 @@ public class Type implements Command {
             if(!isCommandBuiltin && !isShellBuiltin) {
                 System.out.println(e.getMessage());
             }
-            if(isCommandBuiltin)
-                System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
-            else
-                System.out.println(context.getArguments()[0] + " is a shell builtin");
         }
+
+        if(isCommandBuiltin)
+            System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
+        else
+            System.out.println(context.getArguments()[0] + " is a shell builtin");
 
 
     }
