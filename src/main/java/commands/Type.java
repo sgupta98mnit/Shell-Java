@@ -26,6 +26,11 @@ public class Type implements Command {
             }
         }
 
+        String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
+        if (StringUtils.isNotBlank(filePath)) {
+            isCommandBuiltin = true;
+        }
+
         if(isCommandBuiltin)
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         else
