@@ -27,5 +27,8 @@ public class Type implements Command {
             }
             System.out.println(e.getMessage());
         }
+        System.out.println(context.getArguments()[0] + " is a shell builtin");
+
+
     }
 }
