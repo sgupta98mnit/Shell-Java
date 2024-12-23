@@ -11,6 +11,7 @@ public class Type implements Command {
     public void execute(CommandContext context) {
         CommandRegistry registry = CommandRegistry.getInstance();
         boolean isShellBuiltin = false;
+        boolean isCommandBuiltin = false;
         try {
             registry.getCommandByCommandName(context.getArguments()[0]);
             isShellBuiltin = true;
@@ -18,16 +19,16 @@ public class Type implements Command {
             // Check if command exist in PATH
             String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
             if (StringUtils.isNotBlank(filePath)) {
-                System.out.println(context.getArguments()[0] + " is " + filePath);
-                return ;
+                isCommandBuiltin = true;
             }
-            if(isShellBuiltin) {
+            if(!isCommandBuiltin && !isShellBuiltin) {
+                System.out.println(e.getMessage());
+            }
+            if(isCommandBuiltin)
+                System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
+            else
                 System.out.println(context.getArguments()[0] + " is a shell builtin");
-                return ;
-            }
-            System.out.println(e.getMessage());
         }
-        System.out.println(context.getArguments()[0] + " is a shell builtin");
 
 
     }
