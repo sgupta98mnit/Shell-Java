@@ -31,7 +31,7 @@ public class Type implements Command {
             isCommandBuiltin = true;
         }
 
-        if(isCommandBuiltin && StringUtils.equalsIgnoreCase(context.getCommand(), "pwd"))
+        if(isCommandBuiltin && (StringUtils.equalsIgnoreCase(context.getCommand(), "pwd") || StringUtils.equalsIgnoreCase(context.getCommand(), "cat")))
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         else
             System.out.println(context.getArguments()[0] + " is a shell builtin");
