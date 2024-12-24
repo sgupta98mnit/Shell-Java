@@ -43,4 +43,18 @@ public final class Utility {
         return fileContent;
     }
 
+    public static String parseEscapeString(String argumentString) {
+        StringBuilder parsedEscapedArgument = new StringBuilder();
+
+        for(int i = 0; i < argumentString.length(); ++i) {
+            if(argumentString.charAt(i) == '\\') {
+                ++i;
+                parsedEscapedArgument.append(argumentString.charAt(i));
+            } else {
+                parsedEscapedArgument.append(argumentString.charAt(i));
+            }
+        }
+        return parsedEscapedArgument.toString();
+    }
+
 }

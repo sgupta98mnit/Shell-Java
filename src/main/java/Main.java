@@ -3,6 +3,7 @@ import commands.CommandContext;
 import commands.CommandRegistry;
 import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
+import utility.Utility;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -48,21 +49,15 @@ public class Main {
         String[] arguments;
         if(StringUtils.startsWith(argumentString, "\"")) {
             arguments = StringUtils.substringsBetween(argumentString, "\"", "\"");
+
+            for(int i = 0; i < arguments.length; i++) {
+                arguments[i] = Utility.parseEscapeString(arguments[i]);
+            }
         }else if(StringUtils.startsWith(argumentString, "'")) {
             arguments = StringUtils.substringsBetween(argumentString, "'", "'");
         }
         else if(StringUtils.contains(argumentString, "\\")) {
-            StringBuilder parsedEscapedArgument = new StringBuilder();
-
-            for(int i = 0; i < argumentString.length(); ++i) {
-                if(argumentString.charAt(i) == '\\') {
-                    ++i;
-                    parsedEscapedArgument.append(argumentString.charAt(i));
-                } else {
-                    parsedEscapedArgument.append(argumentString.charAt(i));
-                }
-            }
-            arguments = new String[]{parsedEscapedArgument.toString()};
+            arguments = new String[]{Utility.parseEscapeString(argumentString)};
         }
         else {
             argumentString = " " + argumentString + " ";
