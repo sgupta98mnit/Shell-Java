@@ -21,7 +21,7 @@ public final class Utility {
 
         for(String p : paths) {
             String filePath = p + "/" + fileName;
-            if(StringUtils.equalsIgnoreCase("my_exe", filePath)) {
+            if(StringUtils.equalsIgnoreCase("my_exe", fileName)) {
                 System.out.println(filePath);
                 System.out.println(checkFileExists(filePath));
             }
