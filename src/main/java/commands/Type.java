@@ -29,7 +29,7 @@ public class Type implements Command {
                 isCommandBuiltin = true;
             }
             if(!isCommandBuiltin && !isShellBuiltin) {
-                System.out.println(e.getMessage());
+                System.out.println(context.getArguments()[0] + ": not found");
                 return;
             }
         }
