@@ -13,7 +13,6 @@ public class Execute implements Command {
     public void execute(CommandContext context) throws CommandNotFound {
 
         String filePath = Utility.checkFileExistsOnPath(context.getCommand());
-        System.out.println("filePath: " + filePath);
         if (StringUtils.isNotBlank(filePath)) {
             try {
                 Process process = Runtime.getRuntime().exec(context.getLine());
