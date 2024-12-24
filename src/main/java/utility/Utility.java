@@ -21,10 +21,6 @@ public final class Utility {
 
         for(String p : paths) {
             String filePath = p + "/" + fileName;
-            if(StringUtils.equalsIgnoreCase(fileName, "cat") || StringUtils.equalsIgnoreCase(fileName, "pwd")) {
-                System.out.println(filePath);
-                System.out.println(checkFileExists(filePath));
-            }
             if(Utility.checkFileExists(filePath)) {
                 return filePath;
             }
