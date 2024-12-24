@@ -2,7 +2,7 @@ package exception;
 
 public class CommandNotFound extends Exception {
     public CommandNotFound(String message) {
-        super(message + ": not found");
+        super(message + ": command not found");
     }
 
 }
