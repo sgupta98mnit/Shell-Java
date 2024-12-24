@@ -35,7 +35,7 @@ public class Type implements Command {
         if (StringUtils.isNotBlank(filePath)) {
             isCommandBuiltin = true;
         }
-        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp"});
+        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp", "mkdir"});
         if(isCommandBuiltin && executableCommands.contains(context.getArguments()[0]))
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         else
