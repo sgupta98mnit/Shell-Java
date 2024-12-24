@@ -28,11 +28,11 @@ public class Type implements Command {
             if (StringUtils.isNotBlank(filePath)) {
                 isCommandBuiltin = true;
             }
-//            if(!executableCommands.contains(context.getArguments()[0]) && StringUtils.equalsIgnoreCase(context.getCommand(), "my_exe")) {
-//                System.out.println("Command not found");
-//                System.out.println(isCommandBuiltin);
-//                System.out.println(isShellBuiltin);
-//            }
+            if(!executableCommands.contains(context.getArguments()[0]) && StringUtils.equalsIgnoreCase(context.getCommand(), "my_exe")) {
+                System.out.println("Command not found");
+                System.out.println(isCommandBuiltin);
+                System.out.println(isShellBuiltin);
+            }
             if(!isCommandBuiltin && !isShellBuiltin) {
                 System.out.println(e.getMessage());
                 return;
