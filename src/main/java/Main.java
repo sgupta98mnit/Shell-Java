@@ -51,9 +51,23 @@ public class Main {
         }else if(StringUtils.startsWith(argumentString, "\"")) {
             arguments = StringUtils.substringsBetween(argumentString, "\"", "\"");
         }
+        else if(StringUtils.contains(argumentString, "\\")) {
+            StringBuilder parsedEscapedArgument = new StringBuilder();
+
+            for(int i = 0; i < argumentString.length(); ++i) {
+                if(argumentString.charAt(i) == '\\') {
+                    ++i;
+                    parsedEscapedArgument.append(argumentString.charAt(i));
+                } else {
+                    parsedEscapedArgument.append(argumentString.charAt(i));
+                }
+            }
+            arguments = new String[]{parsedEscapedArgument.toString()};
+        }
         else {
             argumentString = " " + argumentString + " ";
             arguments = StringUtils.split(argumentString, " ");
+
         }
         context.setArguments(arguments);
     }
