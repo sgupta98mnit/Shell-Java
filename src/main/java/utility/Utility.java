@@ -12,7 +12,7 @@ public final class Utility {
     public static boolean checkFileExists(String path) {
         File file = new File(path);
 //        System.out.println(path + ": " + file.isFile());
-        return file.isDirectory();
+        return file.isFile();
     }
 
     public static String checkFileExistsOnPath(String fileName) {
