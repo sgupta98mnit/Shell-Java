@@ -17,18 +17,22 @@ public class Type implements Command {
         CommandRegistry registry = CommandRegistry.getInstance();
         boolean isShellBuiltin = false;
         boolean isCommandBuiltin = false;
+        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp", "mkdir"});
         try {
             registry.getCommandByCommandName(context.getArguments()[0]);
             isShellBuiltin = true;
         } catch (CommandNotFound e) {
             // Check if command exist in PATH
-            System.out.println("Command not found");
+
             String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
             if (StringUtils.isNotBlank(filePath)) {
                 isCommandBuiltin = true;
             }
-            System.out.println(isCommandBuiltin);
-            System.out.println(isShellBuiltin);
+            if(!executableCommands.contains(context.getArguments()[0])) {
+                System.out.println("Command not found");
+                System.out.println(isCommandBuiltin);
+                System.out.println(isShellBuiltin);
+            }
             if(!isCommandBuiltin && !isShellBuiltin) {
                 System.out.println(e.getMessage());
             }
@@ -38,7 +42,7 @@ public class Type implements Command {
         if (StringUtils.isNotBlank(filePath)) {
             isCommandBuiltin = true;
         }
-        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp", "mkdir"});
+
         if(executableCommands.contains(context.getArguments()[0])) {
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         }
