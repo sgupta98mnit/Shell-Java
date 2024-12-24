@@ -11,7 +11,7 @@ public class Execute implements Command {
 
     @Override
     public void execute(CommandContext context) throws CommandNotFound {
-
+        System.out.println("inside execute");
         String filePath = Utility.checkFileExistsOnPath(context.getCommand());
         if (StringUtils.isNotBlank(filePath)) {
             try {
