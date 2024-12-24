@@ -46,10 +46,10 @@ public class Main {
         context.setCommand(command);
         String argumentString = StringUtils.substring(context.getLine(), firstSpacePos + 1, context.getLine().length());
         String[] arguments;
-        if(StringUtils.startsWith(argumentString, "'")) {
-            arguments = StringUtils.substringsBetween(argumentString, "'", "'");
-        }else if(StringUtils.startsWith(argumentString, "\"")) {
+        if(StringUtils.startsWith(argumentString, "\"")) {
             arguments = StringUtils.substringsBetween(argumentString, "\"", "\"");
+        }else if(StringUtils.startsWith(argumentString, "'")) {
+            arguments = StringUtils.substringsBetween(argumentString, "'", "'");
         }
         else if(StringUtils.contains(argumentString, "\\")) {
             StringBuilder parsedEscapedArgument = new StringBuilder();
