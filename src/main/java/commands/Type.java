@@ -30,7 +30,9 @@ public class Type implements Command {
         if (StringUtils.isNotBlank(filePath)) {
             isCommandBuiltin = true;
         }
-
+        if(StringUtils.equalsIgnoreCase(context.getCommand(), "cat")) {
+            System.out.println(isCommandBuiltin);
+        }
         if(isCommandBuiltin && (StringUtils.equalsIgnoreCase(context.getCommand(), "pwd") || StringUtils.equalsIgnoreCase(context.getCommand(), "cat")))
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         else
