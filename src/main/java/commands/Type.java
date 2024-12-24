@@ -4,6 +4,11 @@ import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
 import utility.Utility;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Type implements Command {
 
@@ -30,7 +35,8 @@ public class Type implements Command {
         if (StringUtils.isNotBlank(filePath)) {
             isCommandBuiltin = true;
         }
-        if(isCommandBuiltin && (StringUtils.equalsIgnoreCase(context.getArguments()[0], "cat")))
+        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp"});
+        if(isCommandBuiltin && executableCommands.contains(context.getArguments()[0]))
             System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
         else
             System.out.println(context.getArguments()[0] + " is a shell builtin");
