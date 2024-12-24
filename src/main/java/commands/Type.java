@@ -22,10 +22,13 @@ public class Type implements Command {
             isShellBuiltin = true;
         } catch (CommandNotFound e) {
             // Check if command exist in PATH
+            System.out.println("Command not found");
             String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
             if (StringUtils.isNotBlank(filePath)) {
                 isCommandBuiltin = true;
             }
+            System.out.println(isCommandBuiltin);
+            System.out.println(isShellBuiltin);
             if(!isCommandBuiltin && !isShellBuiltin) {
                 System.out.println(e.getMessage());
             }
