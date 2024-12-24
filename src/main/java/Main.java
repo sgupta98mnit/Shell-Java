@@ -36,19 +36,6 @@ public class Main {
     }
 
     private static void parseCommand(CommandContext context) {
-//        int firstSpaceIndex = StringUtils.indexOf(context.getLine(), ' ');
-//
-//        if (firstSpaceIndex == -1) {
-//            //System.out.println("No space found: " + context.getLine());
-//            context.setCommand(context.getLine());
-//            return;
-//        }
-//        String command = StringUtils.substring(context.getLine(), 0, firstSpaceIndex);
-//        String argument = StringUtils.substring(context.getLine(), firstSpaceIndex + 1);
-//
-//        context.setCommand(command);
-//        context.setArgument(argument);
-        //System.out.println("Context: " + context);
 
         int firstSpacePos = StringUtils.indexOf(context.getLine(), " ");
         if(firstSpacePos == -1) {
@@ -61,7 +48,8 @@ public class Main {
         String[] arguments;
         if(StringUtils.startsWith(argumentString, "'")) {
             arguments = StringUtils.substringsBetween(argumentString, "'", "'");
-
+        }else if(StringUtils.startsWith(argumentString, "\"")) {
+            arguments = StringUtils.substringsBetween(argumentString, "\"", "\"");
         }
         else {
             argumentString = " " + argumentString + " ";
