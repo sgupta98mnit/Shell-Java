@@ -4,41 +4,47 @@ import exception.CommandNotFound;
 import org.apache.commons.lang3.StringUtils;
 import utility.Utility;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class Type implements Command {
 
     @Override
     public void execute(CommandContext context) {
-        if (context.getArguments() == null || context.getArguments().length == 0) {
-            System.out.println("Error: No command provided");
-            return;
-        }
-
-        String commandName = context.getArguments()[0];
         CommandRegistry registry = CommandRegistry.getInstance();
-
-        // Check if the command is a shell built-in
         boolean isShellBuiltin = false;
+        boolean isCommandBuiltin = false;
         try {
-            registry.getCommandByCommandName(commandName);
+            registry.getCommandByCommandName(context.getArguments()[0]);
             isShellBuiltin = true;
         } catch (CommandNotFound e) {
-            // Do nothing here; proceed to other checks
+            // Check if command exist in PATH
+            String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
+            if (StringUtils.isNotBlank(filePath)) {
+                isCommandBuiltin = true;
+            }
+            if(!isCommandBuiltin && !isShellBuiltin) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        // Check if the command is an executable in PATH
-        String filePath = Utility.checkFileExistsOnPath(commandName);
-        boolean isExecutable = StringUtils.isNotBlank(filePath);
-
-        // Determine the type of the command
-        if (isShellBuiltin) {
-            System.out.println(commandName + " is a shell builtin");
-        } else if (isExecutable) {
-            System.out.println(commandName + " is " + filePath);
-        } else {
-            System.out.println(commandName + " is not found");
+        String filePath = Utility.checkFileExistsOnPath(context.getArguments()[0]);
+        if (StringUtils.isNotBlank(filePath)) {
+            isCommandBuiltin = true;
         }
+        List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp", "mkdir"});
+        if(executableCommands.contains(context.getArguments()[0])) {
+            System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
+        }
+        else if(isShellBuiltin)
+            System.out.println(context.getArguments()[0] + " is a shell builtin");
+        else
+            System.out.println(context.getArguments()[0] + " is " + Utility.checkFileExistsOnPath(context.getArguments()[0]));
+
+
+
     }
 }
