@@ -19,7 +19,7 @@ public class Type implements Command {
         boolean isCommandBuiltin = false;
         List<String> executableCommands = Arrays.asList(new String[]{"cat", "cp", "mkdir"});
         try {
-            registry.getCommandByCommandName(context.getArguments()[0]);
+            registry.getCommandByCommandName(context.getCommand());
             isShellBuiltin = true;
         } catch (CommandNotFound e) {
             // Check if command exist in PATH
